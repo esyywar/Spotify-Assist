@@ -1,0 +1,8 @@
+# App permission given by strings (details at: https://developer.spotify.com/documentation/general/guides/scopes/#playlist-read-collaborative)
+
+AppScope = [
+    "playlist-modify-private", 
+    "user-library-modify", 
+    "user-read-recently-played", 
+    "playlist-modify-public"
+]   
