@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"math/rand"
 	"net/http"
@@ -54,23 +53,23 @@ func main() {
 	log.Fatal(http.ListenAndServe(":5000", router))
 }
 
-func spotifyAuth(redirect string) *http.Response {
-	fmt.Println("Getting auth from spotify...")
+func HomeGreet(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("API home test"))
+}
 
-	req, err := http.NewRequest("GET", "https://accounts.spotify.com/authorize", nil)
+func Login(w http.ResponseWriter, r *http.Request) {
+	req, err := http.NewRequest("GET", "https://accounts.spotify.com/authorize?", nil)
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	var characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+	characters := "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
 	state := make([]byte, 16)
 	for i := range state {
 		state[i] = characters[rand.Int63()%int64(len(characters))]
 	}
-
-	fmt.Println(string(state))
 
 	query := req.URL.Query()
 	query.Add("client_id", appData.ClientId)
@@ -79,20 +78,9 @@ func spotifyAuth(redirect string) *http.Response {
 	query.Add("state", string(state))
 	query.Add("scope", config.scopeStringify())
 
-	res, err := http.Get(req.URL.String())
+	authUrl := req.URL.String() + query.Encode()
 
-	return res
-}
-
-func HomeGreet(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("API home test"))
-}
-
-func Login(w http.ResponseWriter, r *http.Request) {
-	/* Get request to Spotify authorize */
-	res := spotifyAuth("/dashboard")
-
-	fmt.Println(res)
+	http.Redirect(w, r, authUrl, 200)
 }
 
 func Dashboard(w http.ResponseWriter, r *http.Request) {
