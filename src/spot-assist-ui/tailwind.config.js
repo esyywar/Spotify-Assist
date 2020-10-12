@@ -5,10 +5,6 @@ module.exports = {
   },
   purge: [],
   theme: {
-    fontFamily: {
-      display: ['Mulish', 'sans-serif'],
-      body: ['Mulish', 'sans-serif']
-    },
     extend: {},
   },
   variants: {},

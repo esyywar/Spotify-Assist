@@ -1,3 +1,4 @@
 *.exe
 node_modules/
 backend/privData.toml
+dist/
