@@ -13,13 +13,16 @@
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
 		"react-scripts": "3.4.3",
+		"tailwindcss": "^1.8.13",
 		"typescript": "^3.7.5"
 	},
 	"scripts": {
-		"start": "react-scripts start",
-		"build": "react-scripts build",
+		"start": "npm run watch:css && react-scripts start",
+		"build": "npm run build:css && react-scripts build",
 		"test": "react-scripts test",
-		"eject": "react-scripts eject"
+		"eject": "react-scripts eject",
+		"build:css": "postcss src/assets/tailwind.css -o src/assets/main.css",
+		"watch:css": "postcss src/assets/tailwind.css -o src/assets/main.css"
 	},
 	"eslintConfig": {
 		"extends": "react-app"
@@ -36,5 +39,9 @@
 			"last 1 safari version"
 		]
 	},
-	"proxy": "http://localhost:5000"
+	"proxy": "http://localhost:5000",
+	"devDependencies": {
+		"postcss": "^8.1.1",
+		"postcss-cli": "^8.1.0"
+	}
 }
