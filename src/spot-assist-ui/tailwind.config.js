@@ -8,5 +8,16 @@ module.exports = {
     extend: {},
   },
   variants: {},
-  plugins: [],
+  corePlugins: {
+    container: false
+  },
+  plugins: [
+    function ({ addComponents }) {
+      addComponents({
+        '.container': {
+          maxWidth: '100%',
+        }
+      })
+    }
+  ]
 }

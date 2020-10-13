@@ -1,10 +1,19 @@
 import React from 'react'
 
+import { Link } from 'react-router-dom'
+
 export default function NavBar() {
+	const navToggle = (e: React.MouseEvent) => {
+		document.getElementById('collapsable-nav')?.classList.toggle('hidden')
+	}
+
 	return (
-		<nav className="flex items-center flex-wrap justify-between bg-green-600 p-3">
-			<div className="block lg:hidden">
-				<button className="flex items-center px-3 py-2 border rounded text-teal-200 border-white-100 hover:text-white hover:border-white">
+		<nav className="flex items-center flex-wrap justify-between bg-blue-500 px-3 lg:px-4">
+			<div className="block lg:hidden pt-4 pb-3 lg:py-4">
+				<button
+					className="flex items-center px-3 py-2 border rounded border-white-100 hover:text-white hover:border-white text-blue-100 focus:outline-none"
+					onClick={navToggle}
+				>
 					<svg
 						className="fill-current h-3 w-3"
 						viewBox="0 0 20 20"
@@ -15,13 +24,20 @@ export default function NavBar() {
 					</svg>
 				</button>
 			</div>
-			<div className="flex-1 justify-self-end flex items-center justify-end pr-5">
-				<div className="ml-8 justify-self-end text-right text-green-200 hover:text-white cursor-pointer">
-					Utilities
-				</div>
-				<div className="ml-8 justify-self-end text-right text-green-200 hover:text-white cursor-pointer">
-					Login
-				</div>
+
+			{/* Flex row navigation options for large screens */}
+			<div
+				id="collapsable-nav"
+				className="w-full block lg:flex flex-row lg:items-center lg:justify-end hidden"
+			>
+				<ul className="w-full flex-1 flex flex-wrap lg:justify-end pr-5 lg:pr-20 mt-2 lg:mt-0">
+					<li className="w-full pb-3 lg:py-4 lg:w-auto lg:mt-0 ml-3 lg:ml-16 justify-self-end lg:text-right text-blue-200 hover:text-white cursor-pointer lg:px-3 lg:border-b-2 border-transparent hover:border-blue-100 transition-all duration-300">
+						<Link to="/utils">Utilities</Link>
+					</li>
+					<li className="w-full pb-3 lg:py-4 lg:w-auto lg:mt-0 ml-3 lg:ml-16 justify-self-end lg:text-right text-blue-200 hover:text-white cursor-pointer lg:px-3 lg:border-b-2 border-transparent hover:border-blue-100 transition-all duration-300">
+						<Link to="/login">Login</Link>
+					</li>
+				</ul>
 			</div>
 		</nav>
 	)

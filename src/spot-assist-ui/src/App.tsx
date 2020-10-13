@@ -6,7 +6,7 @@ import NavBar from './components/navigation/NavBar'
 
 function App() {
 	return (
-		<div className="w-screen container bg-green-100">
+		<div className="container">
 			<Router>
 				<NavBar />
 				<div className="App">Content Incoming</div>
